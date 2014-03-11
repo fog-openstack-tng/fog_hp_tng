@@ -1,7 +1,7 @@
+<<<<<<< HEAD
 # FogHpTng
 
-
-The extension layer on top of openstackcommon for HP
+TODO: Write a gem description
 
 ## Installation
 
@@ -28,4 +28,9 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+=======
+fog_hp_tng
+==========
+
 The extension layer on top of openstackcommon for HP
+>>>>>>> a553df955a940f4060ec95af5e842fac8dc9298a
