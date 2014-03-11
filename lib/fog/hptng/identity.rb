@@ -26,6 +26,7 @@ module Fog
       class Real < OpenStackCommon::Real
 
 
+        #This hook is called by OSC::Real::initialize, default behavior is a NOP
         def customize_options(options)
           options.merge!(:openstack_username => options[:hp_access_key])
           options.merge!(:openstack_api_key => options[:hp_secret_key])
@@ -35,6 +36,7 @@ module Fog
           options.merge!(:openstack_use_upass_auth_style => (options[:hp_use_upass_auth_style]) || false)
         end
 
+        #This hook is called by OSC::Real::authenticate (private method), default behavior is to return Fog::OpenStackCommon::Authenticator
         def authenticator
          Fog::HpTng::Authenticator
         end

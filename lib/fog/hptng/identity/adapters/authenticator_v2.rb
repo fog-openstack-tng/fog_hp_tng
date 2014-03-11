@@ -9,6 +9,8 @@ module Fog
         module AuthenticatorV2
           extend Fog::OpenStackCommon::Authentication::Adapters::AuthenticatorV2
 
+          #this method is invoked by Fog::OpenStackCommon::Authentication::Adapters::AuthenticatorV2#request_tokens
+          #default behavior is to return a request of the form "passwordCredentials"
           def self.authenticate_request(request, options = {})
             api_key     = options[:openstack_api_key].to_s
             username    = options[:openstack_username].to_s
