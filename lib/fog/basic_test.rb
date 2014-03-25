@@ -15,5 +15,3 @@ options = {
 }
 
  x = Fog::Identity.new(options)
-
- puts x.to_yaml

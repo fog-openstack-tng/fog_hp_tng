@@ -13,10 +13,10 @@ describe Fog::Identity::HpTng::Real do
     :hp_auth_uri        => "#{Fog.credentials[:hp_auth_uri]}",
     :hp_access_key      => "#{Fog.credentials[:hp_access_key]}",
     :hp_secret_key      => "#{Fog.credentials[:hp_secret_key]}",
-    :hp_tenant_id       => "#{Fog.credentials[:hp_tenant_id]}",
+    :hp_tenant_name      => "#{Fog.credentials[:hp_tenant_name]}",
     :hp_use_upass_auth_style => true,
 
-    #:connection_options => {:proxy => 'http://localhost:8888'}
+    :connection_options => {:proxy => 'http://localhost:8888'}
   }
 
   }
@@ -38,8 +38,20 @@ describe Fog::Identity::HpTng::Real do
             connection.auth_token.wont_be_nil
           end
 
-          [:current_user, :current_tenant, :unscoped_token].each do |attrib|
-            it { connection.must_respond_to attrib }
+          #[:current_user, :current_tenant, :unscoped_token].each do |attrib|
+          #  it { connection.must_respond_to attrib }
+          #end
+
+          it '#current_user' do
+            connection.current_user.wont_be_nil
+          end
+
+          it '#current_tenant' do
+            connection.current_tenant.wont_be_nil
+          end
+
+          it '#unscoped_token' do
+            connection.unscoped_token.wont_be_nil
           end
 
         end
@@ -57,5 +69,3 @@ describe Fog::Identity::HpTng::Real do
 
 
 end
-
-
