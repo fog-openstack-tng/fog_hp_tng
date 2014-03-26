@@ -26,19 +26,23 @@ module Fog
 
 
         def initialize(options={})
-          customize_options(options)
-          @osc_identity = Fog::Identity::V2::OpenStackCommon.new(options)
+          @options = options.dup
+          @osc_identity = Fog::Identity::V2::OpenStackCommon.new(
+            customize_options(@options)
+          )
         end
 
 
         def customize_options(options)
-          options.merge!(:openstack_username => options[:hp_access_key])
-          options.merge!(:openstack_api_key => options[:hp_secret_key])
-          options.merge!(:openstack_auth_url => options[:hp_auth_uri])
-          options.merge!(:openstack_region => options[:hp_avl_zone ] )
-          options.merge!(:openstack_tenant => options[:hp_tenant_name] )
-          options.merge!(:openstack_use_upass_auth_style => (options[:hp_use_upass_auth_style]) || false)
-          options.merge!(:openstack_endpoint_type => "publicURL")
+          opts = options.dup
+          opts.merge!(:openstack_username => opts.delete(:hp_access_key))
+          opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
+          opts.merge!(:openstack_auth_url => opts.delete(:hp_auth_uri))
+          opts.merge!(:openstack_region => opts.delete(:hp_avl_zone ) )
+          opts.merge!(:openstack_tenant => opts.delete(:hp_tenant_name) )
+          opts.merge!(:openstack_use_upass_auth_style => (opts.delete(:hp_use_upass_auth_style)) || false)
+          opts.merge!(:openstack_endpoint_type => "publicURL")
+          opts
         end
 
         def method_missing(method, *args)
