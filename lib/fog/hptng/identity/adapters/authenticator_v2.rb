@@ -17,8 +17,8 @@ module Fog
             identity_service_type = options[:openstack_identity_service_type]
             openstack_region      = options[:openstack_region]
             user_password_style   = options[:openstack_use_upass_auth_style] || true
-            body = request_tokens(options, connection_options)
-            service = get_service(body, service_type, service_name)
+            body                  = request_tokens(options, connection_options)
+            service               = get_service(body, service_type, service_name)
 
             #Note the scoped token stuff is deleted, seems contrary to OS,
             #also the unscoped stuff.
@@ -31,9 +31,9 @@ module Fog
 
             raise_error_if_multiple_endpoints(service['endpoints'])
 
-            tenant         = body['access']['token']['tenant']
-            user           = body['access']['user']
-            identity_url   = identity_service['endpoints'].detect { |s| s['publicURL'] }['publicURL'] if service
+            tenant       = body['access']['token']['tenant']
+            user         = body['access']['user']
+            identity_url = identity_service['endpoints'].detect { |s| s['publicURL'] }['publicURL'] if service
 
             return {
               :user                     => user,
@@ -45,7 +45,6 @@ module Fog
             }
 
           end
-
 
           private
 
@@ -60,7 +59,6 @@ module Fog
             end
           end
 
-
           def self.get_endpoints(endpoints)
             ep = endpoints.select { |endpoint| endpoint['region'] == openstack_region }
             if ep.empty?
@@ -71,7 +69,7 @@ module Fog
           def self.ensure_service_available(service, service_catalog, service_type)
             unless service
               available = service_catalog.map { |endpoint| endpoint['type'] }.sort.join ', '
-              missing = service_type.join ', '
+              missing   = service_type.join ', '
               raise Fog::Errors::NotFound, "Could not find service #{missing}.  Have #{available}"
             end
           end
@@ -86,16 +84,17 @@ module Fog
           def self.request_tokens(options, connection_options = {})
 
 
-            api_key      = options[:openstack_api_key].to_s
-            username     = options[:openstack_username].to_s
-            tenant_name  = options[:openstack_tenant].to_s
-            auth_token   = options[:openstack_auth_token] || options[:unscoped_token]
-            uri          = options[:openstack_auth_uri]
+            api_key                = options[:openstack_api_key].to_s
+            username               = options[:openstack_username].to_s
+            tenant_name            = options[:openstack_tenant_name].to_s
+            tenant_id              = options[:openstack_tenant_id].to_s
+            auth_token             = options[:openstack_auth_token] || options[:unscoped_token]
+            uri                    = options[:openstack_auth_uri]
             username_password_form = options[:openstack_use_upass_auth_style]
 
-            connection   = Fog::Core::Connection.new(uri.to_s, false, connection_options)
+            connection = Fog::Core::Connection.new(uri.to_s, false, connection_options)
 
-            request_body = create_authenticate_request_body(username_password_form, api_key,auth_token, tenant_id,tenant_name, username)
+            request_body = create_authenticate_request_body(username_password_form, api_key, auth_token, tenant_id, tenant_name, username)
 
             response = connection.request({
                                             :expects => [200, 204],
@@ -109,7 +108,7 @@ module Fog
             MultiJson.decode(response.body)
           end
 
-          def self.create_authenticate_request_body(user_password_style,api_key, auth_token,tenant_id, tenant_name, username)
+          def self.create_authenticate_request_body(user_password_style, api_key, auth_token, tenant_id, tenant_name, username)
             request_body = {:auth => Hash.new}
 
             if auth_token
@@ -120,17 +119,16 @@ module Fog
                 request_body[:auth][:passwordCredentials] = {
                   :username => username,
                   :password => api_key
-               }
-              else{
-              #this part is specific to HPC.. will differ for Rackspace
-
-               request_body[:auth][:apiAccessKeyCredentials] = {}
-                request_body[:auth][:apiAccessKeyCredentials] = {
-                  :accessKey => username,
-                  :secretKey => api_key
                 }
+              else
 
-              }
+                  #this part is specific to HPC.. will differ for Rackspace
+                  request_body[:auth][:apiAccessKeyCredentials] = {
+                    :accessKey => username,
+                    :secretKey => api_key
+                  }
+
+
               end
 
               if tenant_id

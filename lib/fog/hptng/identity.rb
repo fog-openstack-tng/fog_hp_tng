@@ -43,7 +43,7 @@ module Fog
           opts.merge!(:openstack_tenant_id => opts.delete(:hp_tenant_id))
           opts.merge!(:openstack_use_upass_auth_style => opts.delete(:hp_use_upass_auth_style))
           opts.merge!(:openstack_endpoint_type => "publicURL")
-          opts.merge!(:authenticator => Fog::HpTng::Authentication::Adapters::AuthenticatorV2.new)
+          opts.merge!(:authenticator => Fog::HpTng::Authentication::Adapters::AuthenticatorV2)
           opts
         end
 
@@ -53,28 +53,7 @@ module Fog
 
       end
 
-#       module Fog
-#   module Openstack
-#     module Rackspace
-#       class Identity < Fog::Service
-#         US_ENDPOINT = 'https://identity.api.rackspacecloud.com/v2.0'
-#         UK_ENDPOINT = 'https://lon.identity.api.rackspacecloud.com/v2.0'
-#
-#         requires :rackspace_username, :rackspace_api_key
-#         recognizes :rackspace_auth_url, :rackspace_region
-#
-#         def initialize(options = {})
-#           options[:authenticator] ||= RackspaceAuthenticator
-#           @osc_identity = Fog::OpenStackCommon::Identity.new(options)
-#         end
-#
-#         def method_missing(method, *args)
-#           @osc_identity.send(method, *args)
-#         end
-#       end
-#     end
-#   end
-# end
+
 
     end
   end
