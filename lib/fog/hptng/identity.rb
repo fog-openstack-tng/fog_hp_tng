@@ -39,9 +39,11 @@ module Fog
           opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
           opts.merge!(:openstack_auth_url => opts.delete(:hp_auth_uri))
           opts.merge!(:openstack_region => opts.delete(:hp_avl_zone ) )
-          opts.merge!(:openstack_tenant => opts.delete(:hp_tenant_name) )
-          opts.merge!(:openstack_use_upass_auth_style => (opts.delete(:hp_use_upass_auth_style)) || false)
+          opts.merge!(:openstack_tenant_name => opts.delete(:hp_tenant_name) )
+          opts.merge!(:openstack_tenant_id => opts.delete(:hp_tenant_id))
+          opts.merge!(:openstack_use_upass_auth_style => opts.delete(:hp_use_upass_auth_style))
           opts.merge!(:openstack_endpoint_type => "publicURL")
+          opts.merge!(:authenticator => Fog::HpTng::Authentication::Adapters::AuthenticatorV2.new)
           opts
         end
 
