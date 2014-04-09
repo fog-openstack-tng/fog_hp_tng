@@ -9,11 +9,11 @@ options = {
   :hp_access_key => "#{Fog.credentials[:hp_access_key]}",
   :hp_secret_key => "#{Fog.credentials[:hp_secret_key]}",
   :hp_tenant_id => "#{Fog.credentials[:hp_tenant_id]}",
-  :hp_use_upass_auth_style => true,
+  :hp_use_upass_auth_style => false,
 
-  :connection_options => {:proxy => 'http://localhost:8888'}
+
+  #:connection_options => {:proxy => 'http://localhost:8888'}
 }
 
- x = Fog::Identity.new(options)
-
- puts x.to_yaml
+ ident = Fog::Identity.new(options)
+ puts ident.requests
