@@ -16,5 +16,5 @@ options = {
 
  x = Fog::Identity.new(options)
 
- x.validate_token
+ x.check_token(12345,nil)
 
