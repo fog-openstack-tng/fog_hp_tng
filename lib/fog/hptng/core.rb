@@ -15,9 +15,7 @@ module Fog
 #     service(:metering,      'Metering')
 #     service(:orchestration, 'Orchestration')
 
-    def authenticate(options, connection_options = {})
-      Fog::Identity.new(options, connection_options = {})
-    end
+
 
   end   # HpTng
 end   # FOG

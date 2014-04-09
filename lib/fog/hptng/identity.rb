@@ -1,48 +1,35 @@
 require_relative './core'
-require 'fog/hptng/identity'
-require 'fog/hptng/identity/authenticator'
+require 'fog/openstackcommon/identity'
 
-
+require 'fog/openstackcommon/common'
 
 module Fog
-  module Identity
-    class HpTng < OpenStackCommon
+  module HpTng
+    class Identity
 
 
-      requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
-      recognizes :hp_auth_uri, :credentials, :hp_service_type
-      recognizes :hp_use_upass_auth_style, :hp_auth_version, :user_agent
-      recognizes :hp_access_key
-      secrets :hp_secret_key
-
-      recognizes :openstack_username,:openstack_api_key, :openstack_auth_url
-
-      #model_path 'fog/hp_tng/models/identity
-
-      class Mock
+      def initialize(options={})
+        @options = options.dup
+        @osc_identity = Fog::OpenStackCommon::Identity.new(
+          customize_options(@options)
+        )
 
       end
 
-      class Real < OpenStackCommon::Real
-
-
-        #This hook is called by OSC::Real::initialize, default behavior is a NOP
-        def customize_options(options)
-          options.merge!(:openstack_username => options[:hp_access_key])
-          options.merge!(:openstack_api_key => options[:hp_secret_key])
-          options.merge!(:openstack_auth_url => options[:hp_auth_uri])
-          options.merge!(:openstack_region => options[:hp_avl_zone ] )
-          options.merge!(:openstack_tenant => options[:hp_tenant_id ] )
-          options.merge!(:openstack_use_upass_auth_style => (options[:hp_use_upass_auth_style]) || false)
-        end
-
-        #This hook is called by OSC::Real::authenticate (private method), default behavior is to return Fog::OpenStackCommon::Authenticator
-        def authenticator
-         Fog::HpTng::Authenticator
-        end
-
-
+      def customize_options(options)
+        opts = options.dup
+        opts.merge!(:openstack_username => opts.delete(:hp_access_key))
+        opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
+        opts.merge!(:openstack_auth_url => opts.delete(:hp_auth_uri))
+        opts.merge!(:openstack_region => opts.delete(:hp_avl_zone))
+        opts.merge!(:openstack_tenant => opts.delete(:hp_tenant_name))
+        #opts.merge!(:openstack_tenant_id => opts.delete(:hp_tenant_id))
+        #opts.merge!(:openstack_use_upass_auth_style => opts.delete(:hp_use_upass_auth_style))
+        opts.merge!(:base_provider => Fog::HpTng)
+        opts
       end
+
+
 
     end
   end
