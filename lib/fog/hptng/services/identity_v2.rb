@@ -4,7 +4,7 @@ require 'fog/openstackcommon/services/identity_v2'
 
 module Fog
   module HpTng
-    class IdentityV2 < Fog::Service
+    class IdentityV2 < Fog::OpenStackCommon::IdentityV2
 
       requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
       recognizes :hp_auth_uri, :credentials, :hp_service_type, :hp_tenant_name
@@ -23,23 +23,18 @@ module Fog
       class Mock
       end
 
+      #class Fog::OpenStackCommon::IdentityV2::Real
+      #  private
+      #    def authenticate
+      #        #NOOP to let the subclass handle it
+      #       puts "got here"
+      #    end
+      #end
+
       class Real < Fog::OpenStackCommon::IdentityV2::Real
 
         def initialize(params={})
-          @options = params.clone
-
-          # get an initial connection to Identity on port 5000 to auth
-          @service = Fog::Core::Connection.new(
-            @options[:hp_auth_uri].to_s,
-            @options[:persistent] || false,
-            @options[:connection_options] || {}
-          )
-
-          authenticate
-        end
-
-        def request(params)
-          base_request(@service, params)
+          super
         end
 
         private
