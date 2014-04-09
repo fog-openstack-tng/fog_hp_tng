@@ -6,12 +6,14 @@ options = {
   :provider          => 'HpTng',
   :hp_avl_zone => "#{Fog.credentials[:hp_avl_zone]}",
   :hp_auth_uri => "#{Fog.credentials[:hp_auth_uri]}",
-  :hp_access_key => "#{Fog.credentials[:hp_account_id]}",
-  :hp_secret_key => "#{Fog.credentials[:hp_secret_key_not_pwd]}",
+  :hp_access_key => "#{Fog.credentials[:hp_access_key]}",
+  :hp_secret_key => "#{Fog.credentials[:hp_secret_key]}",
   :hp_tenant_id => "#{Fog.credentials[:hp_tenant_id]}",
   :hp_use_upass_auth_style => false,
 
-  :connection_options => {:proxy => 'http://localhost:8888'}
+
+  #:connection_options => {:proxy => 'http://localhost:8888'}
 }
 
- x = Fog::Identity.new(options)
+ ident = Fog::Identity.new(options)
+ puts ident.requests
