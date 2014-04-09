@@ -12,6 +12,19 @@ module Fog
       secrets :hp_secret_key
 
 
+     #needs  https : // github.com/fog-openstack-tng/fog_openstack_tng/pull/17
+
+     #Big downer about this approach
+    # 1 its not really composition anymore because of the changes in ServiceDiscovery(bad)
+    #   if you tried to create an OSC IdentityV2 object to delegate to here, it
+    #   would immediately try to authenticate using ITS own definition of requests,
+    #   which is what you are trying to avoid
+    # 2 it doesnt really allow reuse of OSC stuff
+
+    #Pros
+    # each extention layer can completely specify their requests
+    # no mixing of openstack_ and hp_ and rackspace_ parameters
+
       request_path 'fog/hptng/requests/identity/v2'
 
       ## Token Operations

@@ -8,6 +8,7 @@ module Fog
     class Identity
 
 
+
         def initialize(options={})
           @options = options.dup
           @osc_identity = Fog::OpenStackCommon::Identity.new(
