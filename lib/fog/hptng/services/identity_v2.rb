@@ -23,13 +23,6 @@ module Fog
       class Mock
       end
 
-      #class Fog::OpenStackCommon::IdentityV2::Real
-      #  private
-      #    def authenticate
-      #        #NOOP to let the subclass handle it
-      #       puts "got here"
-      #    end
-      #end
 
       class Real < Fog::OpenStackCommon::IdentityV2::Real
 
