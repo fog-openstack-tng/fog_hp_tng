@@ -29,8 +29,9 @@ module Fog
         opts
       end
 
-
-
+      def method_missing(method, *args)
+        @osc_identity.send(method, *args)
+      end
 
 
     end
