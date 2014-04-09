@@ -1,5 +1,6 @@
 require 'fog/openstackcommon/request_common'
 require 'fog/openstackcommon/service_catalog'
+require 'fog/openstackcommon/services/identity_v2'
 
 module Fog
   module HpTng
