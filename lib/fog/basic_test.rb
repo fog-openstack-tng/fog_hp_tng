@@ -11,10 +11,13 @@ options = {
   :hp_tenant_id => "#{Fog.credentials[:hp_tenant_id]}",
   :hp_use_upass_auth_style => false,
 
-  :connection_options => {:proxy => 'http://localhost:8888'}
+  #:connection_options => {:proxy => 'http://localhost:8888'}
 }
 
  x = Fog::Identity.new(options)
 
- x.check_token(12345,nil)
-
+ #x.check_token(12345,nil)
+ puts x.requests
+ puts "*** collections ***"
+ puts x.collections
+ puts x.users

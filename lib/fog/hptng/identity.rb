@@ -8,15 +8,15 @@ module Fog
     class Identity
 
 
-      def initialize(options={})
-        @options = options.dup
-        @osc_identity = Fog::OpenStackCommon::Identity.new(
-          customize_options(@options)
-        )
 
+
+      def self.new(options)
+        @osc_identity = Fog::OpenStackCommon::Identity.new(
+          customize_options(options)
+        )
       end
 
-      def customize_options(options)
+      def self.customize_options(options)
         opts = options.dup
         opts.merge!(:openstack_username => opts.delete(:hp_access_key))
         opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
