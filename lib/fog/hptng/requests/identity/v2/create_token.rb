@@ -29,7 +29,7 @@ module Fog
 
 
           if tenant_id
-            data['auth'].merge!({'tenantId' => tenant_id.to_s })
+            data['auth'].merge!({'tenantId' => tenant_id })
           elsif tenant_name
             data['auth'].merge!({'tenantName' => tenant_name })
           end

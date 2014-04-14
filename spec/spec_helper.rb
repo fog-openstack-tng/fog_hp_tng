@@ -19,6 +19,9 @@ VCR.configure do |c|
     c.filter_sensitive_data('<USERNAME>') { "#{Fog.credentials[:hp_access_key]}" }
     c.filter_sensitive_data('<TENANTID>') { "#{Fog.credentials[:hp_tenant_id]}" }
     c.filter_sensitive_data('<TENANTNAME>'){ "#{Fog.credentials[:hp_tenant_name]}" }
+    c.before_record do |i|
+      i.request.body.sub!("#{Fog.credentials[:hp_tenant_id]}", "<TENANTID>")
+    end
 end
 
 MinitestVcr::Spec.configure!
