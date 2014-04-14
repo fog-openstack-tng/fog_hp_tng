@@ -12,6 +12,8 @@ module Fog
       recognizes :hp_access_key
       secrets :hp_secret_key
 
+      DEFAULT_AUTH_URI = "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens"
+
       request_path 'fog/hptng/requests/identity/v2'
 
       ## Token Operations
@@ -26,7 +28,19 @@ module Fog
       class Real < Fog::OpenStackCommon::IdentityV2::Real
 
         def initialize(options={})
-           super
+           @hp_options = options.dup
+
+           super(customize_options(options))
+        end
+
+        def customize_options(options)
+          opts = options.dup
+          opts.merge!(:openstack_username => opts.delete(:hp_access_key))
+          opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
+          opts.merge!(:openstack_auth_url => opts.delete(:hp_auth_uri) || DEFAULT_AUTH_URI )
+          opts.merge!(:openstack_region => opts.delete(:hp_avl_zone))
+          opts.merge!(:openstack_tenant => opts.delete(:hp_tenant_name))
+          opts
         end
 
         private
@@ -38,10 +52,10 @@ module Fog
         def auth_with_credentials_and_tenant
 
 
-          data = create_token(@options[:hp_access_key],
-                              @options[:hp_secret_key],
+          data = create_token(@hp_options[:hp_access_key],
+                              @hp_options[:hp_secret_key],
                               nil,
-                              @options[:hp_tenant_id])
+                              @hp_options[:hp_tenant_id])
 
 
           @auth_token = data.body['access']['token']['id']

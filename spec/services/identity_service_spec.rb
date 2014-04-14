@@ -25,6 +25,25 @@ describe Fog::HpTng::Identity do
         service.must_be_instance_of Fog::HpTng::IdentityV2::Real
       end
     end
+    #describe"when version is specified" do
+    #  describe "1" do
+    #    it "returns version 1" do
+    #      valid_options[:version] = 1
+    #      service = Fog::Identity.new(valid_options)
+    #      service.must_be_instance_of Fog::HpTng::IdentityV1::Real
+    #    end
+    #
+    #  end
+    #  describe "2" do
+    #    it "returns version 2" do
+    #      valid_options[:version] = 2
+    #      service = Fog::Identity.new(valid_options)
+    #      service.must_be_instance_of Fog::HpTng::IdentityV2::Real
+    #
+    #    end
+    #
+    #  end
+    #end
 
     #describe "endpoint version 2" do
     #  describe "credentials" do

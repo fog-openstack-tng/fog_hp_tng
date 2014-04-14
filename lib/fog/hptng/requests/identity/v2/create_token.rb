@@ -7,7 +7,7 @@ module Fog
         # binding.pry
         def create_token(username, password, tenant_name=nil, tenant_id=nil)
           data = {}
-          if @options[:hp_use_upass_auth_style]
+          if @hp_options[:hp_use_upass_auth_style]
             data = {
               'auth' => {
                 'passwordCredentials' => {

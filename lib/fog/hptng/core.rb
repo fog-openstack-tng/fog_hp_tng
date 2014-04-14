@@ -1,4 +1,4 @@
-require 'multi_json'
+require 'fog/json'
 require 'fog/hptng/errors'
 
 module Fog
