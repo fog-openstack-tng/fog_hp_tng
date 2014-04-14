@@ -29,16 +29,16 @@ module Fog
 
 
           if tenant_id
-            data['auth'].merge!({'tenantId' => tenant_id})
+            data['auth'].merge!({'tenantId' => tenant_id.to_s })
           elsif tenant_name
-            data['auth'].merge!({'tenantName' => tenant_name})
+            data['auth'].merge!({'tenantName' => tenant_name })
           end
 
           request(
             :method  => 'POST',
             :expects => [200, 202],
             :path    => '/v2.0/tokens',
-            :body    => MultiJson.encode(data)
+            :body    => Fog::JSON.encode(data)
           )
         end
 

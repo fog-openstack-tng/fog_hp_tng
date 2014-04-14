@@ -1,4 +1,9 @@
-require_relative './hptng/core'
+
+
+# CORE
+require 'fog/core'
+require 'fog/hptng/core'
+require 'fog/openstackcommon/core'
 
 # IDENTITY
 require 'fog/hptng/identity'

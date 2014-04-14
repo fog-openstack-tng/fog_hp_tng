@@ -1,10 +1,10 @@
 require 'multi_json'
-require 'fog/core'
+require 'fog/hptng/errors'
 
 module Fog
   module HpTng
     extend Fog::Provider
-    extend self
+    include Fog::HpTng::Errors
 
     service(:identity,      'Identity')
 #     service(:compute ,      'Compute')

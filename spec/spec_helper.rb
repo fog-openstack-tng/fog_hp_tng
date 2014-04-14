@@ -14,11 +14,11 @@ require "minitest/reporters"
 VCR.configure do |c|
     c.cassette_library_dir = 'spec/cassettes'
     c.hook_into :webmock
-    # c.debug_logger = $stdout
-
-      #
-
-      #
+    c.debug_logger = $stdout
+    c.filter_sensitive_data('<PASSWORD>') { "#{Fog.credentials[:hp_secret_key]}" }
+    c.filter_sensitive_data('<USERNAME>') { "#{Fog.credentials[:hp_access_key]}" }
+    c.filter_sensitive_data('<TENANTID>') { "#{Fog.credentials[:hp_tenant_id]}" }
+    c.filter_sensitive_data('<TENANTNAME>'){ "#{Fog.credentials[:hp_tenant_name]}" }
 end
 
 MinitestVcr::Spec.configure!

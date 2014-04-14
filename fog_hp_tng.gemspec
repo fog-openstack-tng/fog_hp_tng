@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
 
 
   spec.add_dependency('openstackcommon')
+  spec.add_dependency('fog-json')
   spec.add_dependency('faraday')
   spec.add_dependency('multi_json')
   spec.add_dependency('net-scp', '~>1.1')

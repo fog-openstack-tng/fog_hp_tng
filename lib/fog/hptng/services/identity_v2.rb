@@ -1,4 +1,4 @@
-require 'fog/openstackcommon/request_common'
+require 'fog/hptng/request_common'
 require 'fog/openstackcommon/service_catalog'
 require 'fog/openstackcommon/services/identity_v2'
 
@@ -17,38 +17,6 @@ module Fog
       ## Token Operations
       request :create_token
       request :validate_token
-      #
-      #def self.requests
-      #  if @required
-      #   superclass.requests + (@requests || [])
-      #  else
-      #    @requests || []
-      #  end
-      #end
-      #
-      #def self.models
-      #  if @required
-      #    superclass.models + (@models || [])
-      #  else
-      #    @models || []
-      #  end
-      #end
-      #
-      #def self.mocked_requests
-      #  if @required
-      #    superclass.mocked_requests + (@mocked_requests || [])
-      #  else
-      #    @mocked_requests
-      #  end
-      #end
-      #
-      #def self.collections
-      #  if @required
-      #    superclass.collections + (@collections  || [])
-      #  else
-      #    @collections || []
-      #  end
-      #end
 
       # minimal requirement
       class Mock
