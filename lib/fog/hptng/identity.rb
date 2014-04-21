@@ -1,6 +1,6 @@
 require 'fog/hptng/core'
-require 'fog/openstackcommon/identity'
-require 'fog/openstackcommon/common'
+require 'fog/openstackcore/identity'
+require 'fog/openstackcore/common'
 
 module Fog
   module HpTng

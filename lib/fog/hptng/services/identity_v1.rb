@@ -1,10 +1,10 @@
 require 'fog/hptng/request_common'
-require 'fog/openstackcommon/service_catalog'
-require 'fog/openstackcommon/services/identity_v1'
+require 'fog/openstackcore/service_catalog'
+require 'fog/openstackcore/services/identity_v1'
 
 module Fog
   module HpTng
-    class IdentityV1 < Fog::OpenStackCommon::IdentityV1
+    class IdentityV1 < Fog::OpenStackCore::IdentityV1
 
       requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
       recognizes :hp_auth_uri, :credentials, :hp_service_type, :hp_tenant_name
@@ -22,7 +22,7 @@ module Fog
       end
 
 
-      class Real < Fog::OpenStackCommon::IdentityV1::Real
+      class Real < Fog::OpenStackCore::IdentityV1::Real
 
         def initialize(options={})
           @hp_options = options.dup
@@ -55,7 +55,7 @@ module Fog
           @auth_token = data.headers['X-Auth-Token']
 
           @service_catalog =
-            Fog::OpenStackCommon::ServiceCatalog.from_response(self, data.body)
+            Fog::OpenStackCore::ServiceCatalog.from_response(self, data.body)
           self
         end
 

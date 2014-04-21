@@ -1,10 +1,10 @@
 require 'fog/hptng/request_common'
-require 'fog/openstackcommon/service_catalog'
-require 'fog/openstackcommon/services/identity_v2'
+require 'fog/openstackcore/service_catalog'
+require 'fog/openstackcore/services/identity_v2'
 
 module Fog
   module HpTng
-    class IdentityV2 < Fog::OpenStackCommon::IdentityV2
+    class IdentityV2 < Fog::OpenStackCore::IdentityV2
 
       requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
       recognizes :hp_auth_uri, :credentials, :hp_service_type, :hp_tenant_name
@@ -60,7 +60,7 @@ module Fog
           @auth_token = data.body['access']['token']['id']
 
           @service_catalog =
-            Fog::OpenStackCommon::ServiceCatalog.from_response(self, data.body)
+            Fog::OpenStackCore::ServiceCatalog.from_response(self, data.body)
 
           self
         end
