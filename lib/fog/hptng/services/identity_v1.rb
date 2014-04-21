@@ -25,10 +25,21 @@ module Fog
       class Real < Fog::OpenStackCommon::IdentityV1::Real
 
         def initialize(options={})
-          super
+          @hp_options = options.dup
+          super(customize_options(options))
         end
 
         private
+
+        def customize_options(options)
+          opts = options.dup
+          opts.merge!(:openstack_username => opts.delete(:hp_access_key))
+          opts.merge!(:openstack_api_key => opts.delete(:hp_secret_key))
+          opts.merge!(:openstack_auth_url => opts.delete(:hp_auth_uri) || DEFAULT_AUTH_URI)
+          opts.merge!(:openstack_region => opts.delete(:hp_avl_zone))
+          opts.merge!(:openstack_tenant => opts.delete(:hp_tenant_name))
+          opts
+        end
 
         def authenticate
           return auth_with_credentials

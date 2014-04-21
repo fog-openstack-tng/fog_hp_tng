@@ -1,6 +1,14 @@
 require "./hptng"
+require "fog/core/service"
 
 Excon.defaults[:ssl_verify_peer] = false
+class Fog::Service
+  def self.fetch_credentials(options)
+    options
+  end
+end
+
+
 
 options = {
   :provider          => 'HpTng',
@@ -10,8 +18,9 @@ options = {
   :hp_secret_key => "#{Fog.credentials[:hp_secret_key]}",
   :hp_tenant_id => "#{Fog.credentials[:hp_tenant_id]}",
   :hp_use_upass_auth_style => false,
+  :version => 1
 
-  :connection_options => {:proxy => 'http://localhost:8888'}
+ # :#connection_options => {:proxy => 'http://localhost:8888'}
 }
 
  x = Fog::Identity.new(options)
