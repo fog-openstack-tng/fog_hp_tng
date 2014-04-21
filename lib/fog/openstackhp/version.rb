@@ -1,5 +1,5 @@
 module Fog
-  module HpTng
+  module OpenStackHp
     VERSION = "0.0.1.pre"
   end
 end

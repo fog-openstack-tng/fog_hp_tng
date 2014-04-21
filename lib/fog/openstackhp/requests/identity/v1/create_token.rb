@@ -1,5 +1,5 @@
 module Fog
-  module HpTng
+  module OpenStackHp
     class IdentityV1
       class Real
 

@@ -1,9 +1,9 @@
-require 'fog/hptng/request_common'
+require 'fog/OpenStackHp/request_common'
 require 'fog/openstackcore/service_catalog'
 require 'fog/openstackcore/services/identity_v1'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     class IdentityV1 < Fog::OpenStackCore::IdentityV1
 
       requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
@@ -12,7 +12,7 @@ module Fog
       recognizes :hp_access_key
       secrets :hp_secret_key
 
-      request_path 'fog/hptng/requests/identity/v1'
+      request_path 'fog/openstackhp/requests/identity/v1'
 
       ## Token Operations
       request :create_token

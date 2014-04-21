@@ -1,9 +1,9 @@
-require 'fog/hptng/request_common'
+require 'fog/OpenStackHp/request_common'
 require 'fog/openstackcore/service_catalog'
 require 'fog/openstackcore/services/identity_v2'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     class IdentityV2 < Fog::OpenStackCore::IdentityV2
 
       requires :hp_secret_key, :hp_tenant_id, :hp_avl_zone
@@ -14,7 +14,7 @@ module Fog
 
       DEFAULT_AUTH_URI = "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens"
 
-      request_path 'fog/hptng/requests/identity/v2'
+      request_path 'fog/openstackhp/requests/identity/v2'
 
       ## Token Operations
       request :create_token
@@ -25,7 +25,7 @@ module Fog
       end
 
 
-      class Real < Fog::OpenStackCommon::IdentityV2::Real
+      class Real < Fog::OpenStackCore::IdentityV2::Real
 
         def initialize(options={})
            @hp_options = options.dup

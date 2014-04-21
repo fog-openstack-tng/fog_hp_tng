@@ -1,17 +1,17 @@
-require 'fog/hptng/core'
+require 'fog/OpenStackHp/core'
 require 'fog/openstackcore/identity'
 require 'fog/openstackcore/common'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     class Identity
 
 
       def self.new(options)
         Fog::OpenStackCore::ServiceDiscovery.new(
-          'openstackcore',
+          'openstackhp',
           'identity',
-          options.merge(:base_provider => Fog::HpTng)
+          options
         ).call
       end
 

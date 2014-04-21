@@ -1,7 +1,7 @@
-require 'fog/hptng/errors'
+require 'fog/OpenStackHp/errors'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     module RequestCommon
 
       def base_request(service, params)
@@ -12,9 +12,9 @@ module Fog
           rp = request_params(params)
           response = service.request(rp)
         rescue Excon::Errors::Conflict => error
-          raise Fog::HpTng::Errors::Conflict.slurp(error)
+          raise Fog::OpenStackHp::Errors::Conflict.slurp(error)
         rescue Excon::Errors::BadRequest => error
-          raise Fog::HpTng::Errors::BadRequest.slurp(error)
+          raise Fog::OpenStackHp::Errors::BadRequest.slurp(error)
         rescue Excon::Errors::Unauthorized => error
           raise error unless first_attempt
           first_attempt = false
@@ -22,7 +22,7 @@ module Fog
         rescue Excon::Errors::HTTPStatusError => error
           raise case error
                   when Excon::Errors::NotFound
-                    raise Fog::HpTng::Errors::NotFound.slurp(error)
+                    raise Fog::OpenStackHp::Errors::NotFound.slurp(error)
                   else
                     error
                 end

@@ -1,10 +1,13 @@
 require 'fog/json'
-require 'fog/hptng/errors'
+require 'fog/openstackhp/errors'
+require 'fog/openstackcore/service_discovery'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     extend Fog::Provider
-    include Fog::HpTng::Errors
+    include Fog::OpenStackHp::Errors
+
+    Fog::OpenStackCore::ServiceDiscovery.register_provider('openstackhp', 'Fog::OpenStackHp', 'fog/openstackhp/services')
 
     service(:identity,      'Identity')
 #     service(:compute ,      'Compute')
@@ -17,5 +20,5 @@ module Fog
 
 
 
-  end   # HpTng
+  end   # OpenStackHp
 end   # FOG

@@ -1,4 +1,4 @@
-require "./hptng"
+require "./openstackhp"
 require "fog/core/service"
 
 Excon.defaults[:ssl_verify_peer] = false
@@ -11,14 +11,13 @@ end
 
 
 options = {
-  :provider          => 'HpTng',
+  :provider          => :openstackhp,
   :hp_avl_zone => "#{Fog.credentials[:hp_avl_zone]}",
   #:hp_auth_uri => "#{Fog.credentials[:hp_auth_uri]}",
   :hp_access_key => "#{Fog.credentials[:hp_access_key]}",
   :hp_secret_key => "#{Fog.credentials[:hp_secret_key]}",
   :hp_tenant_id => "#{Fog.credentials[:hp_tenant_id]}",
-  :hp_use_upass_auth_style => false,
-  :version => 1
+  :hp_use_upass_auth_style => false
 
  # :#connection_options => {:proxy => 'http://localhost:8888'}
 }

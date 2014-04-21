@@ -1,13 +1,13 @@
-# FogHpTng
+# OpenStackHP
 
 
-The extension layer on top of openstackcommon for HP
+The extension layer on top of openstackcore for HP
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'fog_hp_tng'
+    gem 'openstack-hp'
 
 And then execute:
 
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fog_hp_tng
+    $ gem install openstack-hp
 
 ## Usage
 

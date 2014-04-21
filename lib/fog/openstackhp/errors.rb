@@ -1,5 +1,5 @@
 module Fog
-  module HpTng
+  module OpenStackHp
     module Errors
       class ServiceError < Fog::Errors::Error
         attr_reader :response_data
