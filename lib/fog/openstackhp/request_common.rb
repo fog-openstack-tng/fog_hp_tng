@@ -1,4 +1,5 @@
-require 'fog/OpenStackHp/errors'
+require 'fog/openstackhp/errors'
+require 'fog/json'
 
 module Fog
   module OpenStackHp
@@ -16,7 +17,7 @@ module Fog
         rescue Excon::Errors::BadRequest => error
           raise Fog::OpenStackHp::Errors::BadRequest.slurp(error)
         rescue Excon::Errors::Unauthorized => error
-          raise error unless first_attempt
+          raise Fog::OpenStackHp::Errors::Unauthorized.slurp(error) unless first_attempt
           first_attempt = false
           retry
         rescue Excon::Errors::HTTPStatusError => error
@@ -28,7 +29,7 @@ module Fog
                 end
         end
         unless response.body.empty?
-          response.body = Fog::Json.decode(response.body)
+          response.body = Fog::JSON.decode(response.body)
         end
 
         response

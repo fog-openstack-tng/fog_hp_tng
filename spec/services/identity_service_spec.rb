@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
 
 require 'fog/openstackhp'
+require 'fog/openstackhp/errors'
 
 Excon.defaults[:ssl_verify_peer] = false
 
@@ -39,6 +40,51 @@ describe Fog::OpenStackHp::Identity do
           valid_options[:version] = 2
           service = Fog::Identity.new(valid_options)
           service.must_be_instance_of Fog::OpenStackHp::IdentityV2::Real
+        end
+      end
+    end
+
+    describe "#auth_with_credentials_and_tenant" do
+      describe "with valid credentials" do
+        let(:service) { Fog::Identity.new(valid_options)}
+
+        it "returns an auth_token" do
+          service.auth_token.wont_be_nil
+        end
+
+        [:service_catalog, :token, :auth_token, :unscoped_token,
+         :current_tenant, :current_user].each do |attrib|
+          it { service.must_respond_to attrib }
+        end
+
+      end
+      describe "with invalid configuration" do
+        describe "for password" do
+          it "throws exception" do
+            invalid_options = valid_options.clone
+            invalid_options[:hp_secret_key] = "BadJuju"
+            proc {
+              Fog::Identity.new(invalid_options)
+            }.must_raise Fog::OpenStackHp::Errors::Unauthorized
+          end
+        end
+        describe "for username" do
+          it "throws exception" do
+            invalid_options = valid_options.clone
+            invalid_options[:hp_access_key] = "BadUser"
+            proc {
+              Fog::Identity.new(invalid_options)
+            }.must_raise Fog::OpenStackHp::Errors::Unauthorized
+          end
+        end
+        describe "for tenant" do
+          it "throws exception" do
+            invalid_options = valid_options.clone
+            invalid_options[:hp_tenant_id] = "IGotNothing"
+            proc {
+              Fog::Identity.new(invalid_options)
+            }.must_raise Fog::OpenStackHp::Errors::Unauthorized
+          end
         end
       end
     end

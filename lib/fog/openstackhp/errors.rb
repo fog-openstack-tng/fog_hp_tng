@@ -26,6 +26,8 @@ module Fog
         end
       end
 
+      class Unauthorized < ServiceError;
+      end
       class InternalServerError < ServiceError;
       end
       class Conflict < ServiceError;

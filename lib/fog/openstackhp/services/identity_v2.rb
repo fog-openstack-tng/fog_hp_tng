@@ -27,6 +27,8 @@ module Fog
 
       class Real < Fog::OpenStackCore::IdentityV2::Real
 
+        include Fog::OpenStackHp::RequestCommon
+
         def initialize(options={})
            @hp_options = options.dup
            super(customize_options(options))
