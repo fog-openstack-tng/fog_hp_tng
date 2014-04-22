@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require './lib/fog/openstackhp/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "openstack-hp"
+  spec.name          = "fog-openstack-hp"
   spec.version       = Fog::OpenStackHp::VERSION
   spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Mike Hagedorn"]
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
 
   spec.add_dependency('fog-core')
-  spec.add_dependency('openstack-core')
+  spec.add_dependency('fog-openstack-core')
   spec.add_dependency('fog-json')
   spec.add_dependency('faraday')
   spec.add_dependency('multi_json')

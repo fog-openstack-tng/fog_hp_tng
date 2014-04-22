@@ -1,4 +1,4 @@
-require 'fog/OpenStackHp/request_common'
+require 'fog/openstackhp/request_common'
 require 'fog/openstackcore/service_catalog'
 require 'fog/openstackcore/services/identity_v2'
 
@@ -55,12 +55,12 @@ module Fog
                               @hp_options[:hp_secret_key],
                               nil,
                               @hp_options[:hp_tenant_id])
+          access_hash = data.body.delete('access')
 
-
-          @auth_token = data.body['access']['token']['id']
+          @auth_token = access_hash['token']['id']
 
           @service_catalog =
-            Fog::OpenStackCore::ServiceCatalog.from_response(self, data.body)
+            Fog::OpenStackCore::ServiceCatalog.from_response(self, access_hash.delete('serviceCatalog'))
 
           self
         end

@@ -1,4 +1,4 @@
-require 'fog/OpenStackHp/request_common'
+require 'fog/openstackhp/request_common'
 require 'fog/openstackcore/service_catalog'
 require 'fog/openstackcore/services/identity_v1'
 
