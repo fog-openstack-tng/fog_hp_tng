@@ -1,4 +1,4 @@
-require 'fog/OpenStackHp/core'
+require 'fog/openstackhp/core'
 require 'fog/openstackcore/identity'
 require 'fog/openstackcore/common'
 

@@ -89,29 +89,6 @@ describe Fog::OpenStackHp::Identity do
       end
     end
 
-    #describe "endpoint version 2" do
-    #  describe "credentials" do
-    #    describe "valid auth", :vcr do
-    #
-    #      let(:connection) { Fog::Identity.new(valid_options) }
-    #
-    #      it "must not be nil" do
-    #        connection.wont_be_nil
-    #      end
-    #
-    #      it "must login succesfully" do
-    #        connection.auth_token.wont_be_nil
-    #      end
-    #
-    #      [:current_user, :current_tenant, :unscoped_token].each do |attrib|
-    #        it { connection.must_respond_to attrib }
-    #      end
-    #
-    #    end
-    #
-    #
-    #  end
-
   end
 
 end
