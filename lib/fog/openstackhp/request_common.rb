@@ -45,8 +45,6 @@ module Fog
       end
 
       def headers(options={})
-        # puts "\nINSIDE HEADERS"
-        # puts "OPTIONS: #{options.to_yaml}"
 
         headers =
           {'Content-Type' => 'application/json',
