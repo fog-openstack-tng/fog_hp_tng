@@ -1,13 +1,16 @@
-require 'multi_json'
-require 'fog/core'
+require 'fog/json'
+require 'fog/openstackhp/errors'
+require 'fog/openstackcore/service_discovery'
 
 module Fog
-  module HpTng
+  module OpenStackHp
     extend Fog::Provider
-    extend self
+    include Fog::OpenStackHp::Errors
+
+    Fog::OpenStackCore::ServiceDiscovery.register_provider('openstackhp', 'Fog::OpenStackHp', 'fog/openstackhp/services')
 
     service(:identity,      'Identity')
-#     service(:compute ,      'Compute')
+    service(:compute ,      'Compute')
 #     service(:image,         'Image')
 #     service(:network,       'Network')
 #     service(:storage,       'Storage')
@@ -15,9 +18,7 @@ module Fog
 #     service(:metering,      'Metering')
 #     service(:orchestration, 'Orchestration')
 
-    def authenticate(options, connection_options = {})
-      Fog::Identity.new(options, connection_options = {})
-    end
 
-  end   # HpTng
+
+  end   # OpenStackHp
 end   # FOG

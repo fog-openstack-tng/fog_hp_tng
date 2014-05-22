@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require './lib/fog/hptng/version'
+require './lib/fog/openstackhp/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "hptng"
-  spec.version       = Fog::HpTng::VERSION
+  spec.name          = "fog-openstack-hp"
+  spec.version       = Fog::OpenStackHp::VERSION
   spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Mike Hagedorn"]
   spec.email         = ["mike@silverchairsolutions.com"]
@@ -20,8 +20,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
 
-
-  spec.add_dependency('openstackcommon')
+  spec.add_dependency('fog-core')
+  spec.add_dependency('fog-openstack-core')
+  spec.add_dependency('fog-json')
   spec.add_dependency('faraday')
   spec.add_dependency('multi_json')
   spec.add_dependency('net-scp', '~>1.1')
